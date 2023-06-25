@@ -1,0 +1,20 @@
+.content ul {
+  margin: 0 auto;
+    list-style-type: none;
+    color: white;
+    width: 80%;
+  }
+  
+  .content ul li {
+    border-bottom: 1px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 12px;
+  }
+  
+  .content ul li .teams {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  

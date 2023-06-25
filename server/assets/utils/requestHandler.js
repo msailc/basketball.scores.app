@@ -1,4 +1,3 @@
-// Load content from server
 function loadContent(url, callback) {
     $.ajax({
       url: url,
