@@ -1,20 +1,33 @@
 .content ul {
   margin: 0 auto;
-    list-style-type: none;
-    color: white;
-    width: 80%;
-  }
-  
-  .content ul li {
-    border-bottom: 1px solid white;
-    padding: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 12px;
-  }
-  
-  .content ul li .teams {
-    font-size: 18px;
-    margin-top: 10px;
-  }
-  
+  list-style-type: none;
+  color: white;
+  width: 80%;
+}
+
+.content ul li {
+  border-bottom: 1px solid white;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.content ul li .teams {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.filter-container {
+  margin-bottom: 10px;
+}
+
+.filter-container label {
+  color: white;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.filter-container select {
+  padding: 5px;
+}

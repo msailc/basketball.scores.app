@@ -1,7 +1,8 @@
 <?php
 
 Flight::route('GET /matches', function () {
-    Flight::json(Flight::matchService()->get_all());
+
+        Flight::json(Flight::matchService()->get_all_matches());
 });
 
 Flight::route('GET /matches/@id', function ($id) {

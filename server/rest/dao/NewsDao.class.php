@@ -2,11 +2,11 @@
 require_once __DIR__ . '/BaseDao.php';
 
 
-class StandingDao extends BaseDao
+class NewsDao extends BaseDao
 {
     public function __construct()
     {
-        parent::__construct("standings");
+        parent::__construct("news");
     }
 
 }

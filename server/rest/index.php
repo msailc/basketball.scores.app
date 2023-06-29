@@ -6,17 +6,20 @@ require '../vendor/autoload.php';
 require_once __DIR__ . '/services/TeamServices.php';
 require_once __DIR__ . '/services/PlayerServices.php';
 require_once __DIR__ . '/services/MatchServices.php';
-require_once __DIR__ . '/services/StandingServices.php';
+require_once __DIR__ . '/services/LeagueServices.php';
+require_once __DIR__ . '/services/NewsServices.php';
 
 Flight::register('teamService', "TeamServices");
 Flight::register('playerService', "playerServices");
 Flight::register('matchService', "matchServices");
-Flight::register('standingService', "standingServices");
+Flight::register('leagueService', "leagueServices");
+Flight::register('newsService', "newsServices");
 
 require_once __DIR__ . '/routes/TeamRoutes.php';
 require_once __DIR__ . '/routes/PlayerRoutes.php';
 require_once __DIR__ . '/routes/MatchRoutes.php';
-require_once __DIR__ . '/routes/StandingRoutes.php';
+require_once __DIR__ . '/routes/LeagueRoutes.php';
+require_once __DIR__ . '/routes/NewsRoutes.php';
 
 Flight::route('GET /', function () {
     echo "Hello";

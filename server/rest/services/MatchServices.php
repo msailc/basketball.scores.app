@@ -9,5 +9,10 @@ class MatchServices extends BaseService
         parent::__construct(new MatchDao);
     }
 
+    public function get_all_matches()
+    {
+        return $this->dao->get_all_matches();
+    }
+
 }
 ?>
