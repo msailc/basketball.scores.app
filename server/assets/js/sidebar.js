@@ -4,8 +4,6 @@ $(document).ready(function() {
 
     if (itemText === "Home") {
       loadContent("http://localhost/localbb/server/rest/matches", function(response) {
-        displayMatches(response);
-        // Add filter by league
         $(".content").html(function() {
           return `
             <div class="filter-container">
@@ -16,26 +14,83 @@ $(document).ready(function() {
                 <option value="2">Euroleague</option>
                 <option value="3">ABA League</option>
               </select>
+              <label for="team-filter">Filter by Team:</label>
+              <select id="team-filter">
+                <option value="">All</option>
+              </select>
             </div>
             <ul class="matches-list"></ul>
           `;
         });
 
+        displayMatches(response);
+
         $("#league-filter").change(function() {
           var selectedLeagueId = $(this).val();
           if (selectedLeagueId !== "") {
-            var filteredMatches = response.filter(function(match) {
-              return match.league_id == selectedLeagueId;
+            loadContent("http://localhost/localbb/server/rest/teams", function(teamsResponse) {
+              var filteredTeams = teamsResponse.filter(function(team) {
+                return team.league_id == selectedLeagueId;
+              });
+
+              var teamFilterOptionsHTML = filteredTeams.map(function(team) {
+                return "<option value='" + team.team_name + "'>" + team.team_name + "</option>";
+              });
+
+              $("#team-filter").html(teamFilterOptionsHTML);
             });
-            displayMatches(filteredMatches);
           } else {
-            displayMatches(response);
+            $("#team-filter").html("<option value=''>All</option>");
           }
+        });
+
+        $("#team-filter").change(function() {
+          var selectedTeam = $(this).val();
+          var selectedLeagueId = $("#league-filter").val();
+          var filteredMatches = response.filter(function(match) {
+            var leagueMatch = match.league_id == selectedLeagueId;
+            var teamMatch = selectedTeam === "" || match.home_team_name === selectedTeam || match.away_team_name === selectedTeam;
+            return leagueMatch && teamMatch;
+          });
+          displayMatches(filteredMatches, selectedTeam);
+        });
+
+        $("#league-filter").change(function() {
+          var selectedLeagueId = $(this).val();
+          var filteredMatches = response.filter(function(match) {
+            return selectedLeagueId === "" || match.league_id == selectedLeagueId;
+          });
+          displayMatches(filteredMatches);
         });
       });
     } else if (itemText === "Teams") {
       loadContent("http://localhost/localbb/server/rest/teams", function(response) {
         displayTeams(response);
+
+        // Add the tabs dynamically
+        $(".content").html(function() {
+          return `
+            <div class="tabs">
+              <button id="nba-tab">NBA</button>
+              <button id="euroleague-tab">Euroleague</button>
+              <button id="aba-league-tab">ABA League</button>
+            </div>
+          `;
+        });
+
+        $("#nba-tab").on("click", function() {
+          displayTeams(response, 1); 
+        });
+
+        $("#euroleague-tab").on("click", function() {
+          displayTeams(response, 2); 
+        });
+
+        $("#aba-league-tab").on("click", function() {
+          displayTeams(response, 3); 
+        });
+
+        $("#nba-tab").trigger("click");
       });
     } else if (itemText === "News") {
       loadContent("http://localhost/localbb/server/rest/news", function(response) {
