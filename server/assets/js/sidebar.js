@@ -71,7 +71,6 @@ $(document).ready(function() {
       loadContent("http://localhost/localbb/server/rest/standings", function(response) {
         displayTeams(response);
 
-        // Add the tabs
         $(".content").html(function() {
           return `
             <div class="tabs">
@@ -104,14 +103,16 @@ $(document).ready(function() {
       window.location.href = "login.html"; 
     } else if (itemText === "Logout") {
       logout();
+    } else if (itemText === "Admin panel") {
+      window.location.href = "admin.html"; 
     }
   });
 });
 
 function logout() {
-  // Remove the token from localStorage
   localStorage.removeItem("token");
 
-  // Reload the page
   window.location.href = "index.html";
 }
+
+
