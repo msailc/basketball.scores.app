@@ -100,6 +100,18 @@ $(document).ready(function() {
       loadContent("http://localhost/localbb/server/rest/news", function(response) {
         displayNews(response);
       });
+    } else if (itemText === "Sign in") {
+      window.location.href = "login.html"; 
+    } else if (itemText === "Logout") {
+      logout();
     }
   });
 });
+
+function logout() {
+  // Remove the token from localStorage
+  localStorage.removeItem("token");
+
+  // Reload the page
+  window.location.href = "index.html";
+}
