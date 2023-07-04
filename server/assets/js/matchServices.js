@@ -11,7 +11,7 @@ function displayMatches(matches, teamFilter) {
     listHTML += "<p><strong>Date & Time:</strong> " + match.match_date + "</p>";
     listHTML += "<p><strong>Location:</strong> " + match.location + "</p>";
     listHTML += "</div>";
-    listHTML += "<p class='teams'>" + match.home_team_name + match.home_team_score + " vs " + match.away_team_score + match.away_team_name + "</p>";
+    listHTML += "<p class='teams'>" + match.home_team_name + " " + match.home_team_score + " vs " + match.away_team_score + " " + match.away_team_name + "</p>";
     listHTML += "</li>";
   });
 
