@@ -6,6 +6,10 @@ function displayTeams(teams, leagueId) {
     if (team.league_id === leagueId) {
       tableHTML += "<tr>";
       tableHTML += "<td>" + team.team_name + "</td>";
+      tableHTML += "<td>" + team.wins + "</td>";
+      tableHTML += "<td>" + team.losses + "</td>";
+      tableHTML += "<td>" + team.points_for + "</td>";
+      tableHTML += "<td>" + team.points_against + "</td>";
       tableHTML += "</tr>";
     }
   });
@@ -36,6 +40,6 @@ function displayTeams(teams, leagueId) {
   });
 }
 
-loadContent("http://localhost/localbb/server/rest/teams", function(response) {
+loadContent("http://localhost/localbb/server/rest/standings", function(response) {
   displayTeams(response, 1);
 });

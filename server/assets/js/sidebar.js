@@ -64,7 +64,7 @@ $(document).ready(function() {
         });
       });
     } else if (itemText === "Teams") {
-      loadContent("http://localhost/localbb/server/rest/teams", function(response) {
+      loadContent("http://localhost/localbb/server/rest/standings", function(response) {
         displayTeams(response);
 
         // Add the tabs dynamically

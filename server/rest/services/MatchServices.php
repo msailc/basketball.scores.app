@@ -14,5 +14,10 @@ class MatchServices extends BaseService
         return $this->dao->get_all_matches();
     }
 
+    public function get_standings()
+    {
+        return $this->dao->get_standings();
+    }
+
 }
 ?>

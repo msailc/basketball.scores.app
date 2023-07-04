@@ -25,5 +25,28 @@ class MatchDao extends BaseDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function get_standings()
+    {
+        $stmt = $this->conn->prepare("
+            SELECT t.team_name, t.league_id, 
+                   SUM(CASE WHEN m.home_team_score > m.away_team_score THEN 2
+                            ELSE 1 END) AS points,
+                   COUNT(*) AS played,
+                   SUM(CASE WHEN m.home_team_score > m.away_team_score THEN 1
+                            ELSE 0 END) AS wins,
+                     SUM(CASE WHEN m.home_team_score < m.away_team_score THEN 1
+                             ELSE 0 END) AS losses,
+                   SUM(m.home_team_score) AS points_for,
+                   SUM(m.away_team_score) AS points_against,
+                   SUM(m.home_team_score) - SUM(m.away_team_score) AS points_difference
+            FROM matches m
+            INNER JOIN teams t ON m.home_team_id = t.id
+            GROUP BY t.team_name
+            ORDER BY points DESC, points_difference DESC, points_for DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>
