@@ -1,26 +1,89 @@
 .content table {
-    margin: 0 auto;
-    width: 80%;
+  margin: 0 auto;
+  width: 80%;
+  color: white;
+  border-collapse: collapse;
+}
+
+.content table th,
+.content table td {
+  padding: 10px;
+  text-align: center;
+  width: 20%;
+}
+
+.content table th {
+  font-size: 16px;
+  border-bottom: 1px solid white;
+}
+
+.content table td {
+  font-size: 14px;
+}
+
+.content table tr:nth-child(even) {
+  background-color: #333333;
+}
+
+  #nba-tab {
+    height: 30px;
+  }
+
+  #euroleague-tab {
+    height: 30px;
+  }
+
+  #aba-league-tab {
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  
+
+  .team-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .team-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .team-logo {
+    width: 100px; 
+    height: 100px; 
+    margin-right: 20px;
+  }
+  
+  .team-name-coach {
     color: white;
-    border-collapse: collapse;
+    font-size: 24px; 
+    font-weight: bold;
   }
   
-  .content table th,
-  .content table td {
-    padding: 10px;
-    text-align: center;
+  .full-width-line {
+    width: 100vh;
+    margin: 20px 0; 
+    border: none;
+    border-top: 1px solid #999; 
   }
   
-  .content table th {
-    font-size: 16px;
-    border-bottom: 1px solid white;
+  .team-players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px; 
   }
   
-  .content table td {
-    font-size: 14px;
+  .players-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 24px; 
   }
   
-  .content table tr:nth-child(even) {
-    background-color: #333333;
+  .players-list li {
+    margin-right: 10px;
   }
   
