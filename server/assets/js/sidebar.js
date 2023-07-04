@@ -7,17 +7,21 @@ $(document).ready(function() {
         $(".content").html(function() {
           return `
             <div class="filter-container">
-              <label for="league-filter">Filter by League:</label>
-              <select id="league-filter">
-                <option value="">All</option>
-                <option value="1">NBA</option>
-                <option value="2">Euroleague</option>
-                <option value="3">ABA League</option>
-              </select>
-              <label for="team-filter">Filter by Team:</label>
-              <select id="team-filter">
-                <option value="">All</option>
-              </select>
+              <div class="filter-row">
+                <label for="league-filter">Filter by League:</label>
+                <select id="league-filter">
+                  <option value="">All</option>
+                  <option value="1">NBA</option>
+                  <option value="2">Euroleague</option>
+                  <option value="3">ABA League</option>
+                </select>
+              </div>
+              <div class="filter-row">
+                <label for="team-filter">Filter by Team:</label>
+                <select id="team-filter">
+                  <option value="">All</option>
+                </select>
+              </div>
             </div>
             <ul class="matches-list"></ul>
           `;
@@ -67,7 +71,7 @@ $(document).ready(function() {
       loadContent("http://localhost/localbb/server/rest/standings", function(response) {
         displayTeams(response);
 
-        // Add the tabs dynamically
+        // Add the tabs
         $(".content").html(function() {
           return `
             <div class="tabs">
@@ -94,7 +98,7 @@ $(document).ready(function() {
       });
     } else if (itemText === "News") {
       loadContent("http://localhost/localbb/server/rest/news", function(response) {
-        $(".content").html(JSON.stringify(response));
+        displayNews(response);
       });
     }
   });

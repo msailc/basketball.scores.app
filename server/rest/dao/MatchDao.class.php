@@ -14,6 +14,7 @@ class MatchDao extends BaseDao
             SELECT m.id, m.match_date, 
                    t1.team_name AS home_team_name, 
                    t2.team_name AS away_team_name, 
+                   t1.team_country AS location,
                    m.home_team_score, 
                    m.away_team_score, 
                    m.league_id 
@@ -28,7 +29,7 @@ class MatchDao extends BaseDao
     public function get_standings()
     {
         $stmt = $this->conn->prepare("
-            SELECT t.team_name, t.league_id, 
+            SELECT t.team_name, t.league_id, t.id, 
                    SUM(CASE WHEN m.home_team_score > m.away_team_score THEN 2
                             ELSE 1 END) AS points,
                    COUNT(*) AS played,

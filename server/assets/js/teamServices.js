@@ -4,8 +4,9 @@ function displayTeams(teams, leagueId) {
 
   teams.forEach(function(team) {
     if (team.league_id === leagueId) {
-      tableHTML += "<tr>";
-      tableHTML += "<td>" + team.team_name + "</td>";
+      tableHTML += "<tr id='team-" + team.id + "'>";
+      console.log(team.id);
+      tableHTML += "<td class='team-name-cell'><a class='team-link' data-team-id='" + team.id + "'>" + team.team_name + "</a></td>";
       tableHTML += "<td>" + team.wins + "</td>";
       tableHTML += "<td>" + team.losses + "</td>";
       tableHTML += "<td>" + team.points_for + "</td>";
@@ -27,6 +28,11 @@ function displayTeams(teams, leagueId) {
     `;
   });
 
+  $(".content").on("click", ".team-name-cell", function() {
+    var teamId = $(this).find(".team-link").data("team-id");
+    loadTeamData(teamId); 
+  });
+
   $("#nba-tab").on("click", function() {
     displayTeams(teams, 1); 
   });
@@ -43,3 +49,35 @@ function displayTeams(teams, leagueId) {
 loadContent("http://localhost/localbb/server/rest/standings", function(response) {
   displayTeams(response, 1);
 });
+
+function loadTeamData(teamId) {
+  var teamUrl = "http://localhost/localbb/server/rest/teams/" + teamId;
+  var playersUrl = "http://localhost/localbb/server/rest/teams/" + teamId + "/players";
+
+  // Fetch team data
+  loadContent(teamUrl, function (teamData) {
+    // Fetch players data
+    loadContent(playersUrl, function (playersData) {
+      $(".content").html(function () {
+        var teamDataHTML = "<div>";
+        teamDataHTML += "<h2>" + teamData.team_name + "</h2>";
+        teamDataHTML += "<p>Country: " + teamData.team_country + "</p>";
+        teamDataHTML += "<p>Coach: " + teamData.team_coach + "</p>";
+
+        teamDataHTML += "<h3>Players:</h3>";
+        if (playersData.length > 0) {
+          teamDataHTML += "<ul>";
+          playersData.forEach(function (player) {
+            teamDataHTML += "<li>" + player.player_name + player.player_age + player.player_country + "</li>";
+          });
+          teamDataHTML += "</ul>";
+        } else {
+          teamDataHTML += "<p>No players found.</p>";
+        }
+
+        teamDataHTML += "</div>";
+        return teamDataHTML;
+      });
+    });
+  });
+}

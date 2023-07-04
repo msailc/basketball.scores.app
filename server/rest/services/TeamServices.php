@@ -9,5 +9,10 @@ class TeamServices extends BaseService
         parent::__construct(new TeamDao);
     }
 
+    public function get_team_players($team_id)
+    {
+        return $this->dao->get_team_players($team_id);
+    }
+
 }
 ?>

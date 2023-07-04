@@ -9,5 +9,10 @@ class TeamDao extends BaseDao
         parent::__construct("teams");
     }
 
+    public function get_team_players($team_id)
+    {
+        return $this->query("SELECT * FROM players WHERE team_id = :team_id", ["team_id" => $team_id]);
+    }
+
 }
 ?>
