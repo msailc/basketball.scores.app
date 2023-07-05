@@ -1,5 +1,10 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Dotenv\Dotenv;
+
+// Load the environment variables from the .env file
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
 class BaseDao
 {
     protected $conn;
@@ -14,11 +19,11 @@ class BaseDao
     public function __construct($table_name)
     {
         $this->table_name = $table_name;
-        $host = Config::$host;
-        $username = Config::$username;
-        $password = Config::$password;
-        $schema = Config::$database;
-        $port = Config::$port;
+        $host = $_ENV['DB_HOST'];
+        $username = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
+        $schema = $_ENV['DB_DATABASE'];
+        $port = $_ENV['DB_PORT'];
         $this->conn = new PDO("mysql:host=$host;port=$port;dbname=$schema", $username, $password);
         // set the PDO error mode to exception
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
