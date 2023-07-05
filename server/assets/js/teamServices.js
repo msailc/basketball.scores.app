@@ -46,13 +46,13 @@ function displayTeams(teams, leagueId) {
   });
 }
 
-loadContent("http://localhost/localbb/server/rest/standings", function(response) {
+loadContent("rest/standings", function(response) {
   displayTeams(response, 1);
 });
 
 function loadTeamData(teamId) {
-  var teamUrl = "http://localhost/localbb/server/rest/teams/" + teamId;
-  var playersUrl = "http://localhost/localbb/server/rest/teams/" + teamId + "/players";
+  var teamUrl = "rest/teams/" + teamId;
+  var playersUrl = "rest/teams/" + teamId + "/players";
 
   // Fetch team data
   loadContent(teamUrl, function (teamData) {
@@ -61,7 +61,6 @@ function loadTeamData(teamId) {
       $(".content").html(function () {
         var teamDataHTML = "<div class='team-details'>";
         teamDataHTML += "<div class='team-info'>";
-        teamDataHTML += "<img class='team-logo' src='team_logo_url' alt='Team Logo'>";
         teamDataHTML += "<div class='team-name-coach'>";
         teamDataHTML += "<h2>" + teamData.team_name + "</h2>";
         teamDataHTML += "<p>Coach: " + teamData.team_coach + "</p>";
@@ -71,11 +70,11 @@ function loadTeamData(teamId) {
         teamDataHTML += "<div class='team-players'>";
         teamDataHTML += "<h3>Players:</h3>";
         if (playersData.length > 0) {
-          teamDataHTML += "<ul class='players-list'>";
+          teamDataHTML += "<div class='players-list'>";
           playersData.forEach(function (player) {
-            teamDataHTML += "<li>" + player.player_name + ", " + player.player_age + ", " + player.player_country + "</li>";
+            teamDataHTML += "<h3>" + player.player_name + ", " + player.player_age + ", " + player.player_country + "</h3>";
           });
-          teamDataHTML += "</ul>";
+          teamDataHTML += "</div>";
         } else {
           teamDataHTML += "<p>No players found.</p>";
         }

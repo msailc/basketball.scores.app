@@ -1,5 +1,5 @@
 function displayMatches(matches, teamFilter) {
-  var listHTML = "<ul class='matches-list'>";
+  var listHTML = "<div>";
 
   matches.forEach(function(match) {
     if (teamFilter && (match.home_team_name !== teamFilter && match.away_team_name !== teamFilter)) {
@@ -15,7 +15,7 @@ function displayMatches(matches, teamFilter) {
     listHTML += "</li>";
   });
 
-  listHTML += "</ul>";
+  listHTML += "</div>";
 
   $(".matches-list").html(listHTML);
 }
@@ -25,15 +25,15 @@ $("#league-filter").change(function() {
   var selectedLeagueId = $(this).val();
 
   if (selectedLeagueId !== "") {
-    loadContent("http://localhost/localbb/server/rest/teams", function(teamsResponse) {
+    loadContent("rest/teams", function(teamsResponse) {
       var selectedTeam = $("#team-filter").val(); 
 
-      loadContent("http://localhost/localbb/server/rest/matches", function(matchesResponse) {
+      loadContent("rest/matches", function(matchesResponse) {
         filterMatches(selectedLeagueId, selectedTeam, matchesResponse, teamsResponse);
       });
     });
   } else {
-    loadContent("http://localhost/localbb/server/rest/matches", function(response) {
+    loadContent("rest/matches", function(response) {
       displayMatches(response);
     });
   }

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  loadItems("http://localhost/localbb/server/rest/teams", "#teams-list");
-  loadItems("http://localhost/localbb/server/rest/players", "#players-list");
-  loadItems("http://localhost/localbb/server/rest/news", "#news-list");
+  loadItems("rest/teams", "#teams-list");
+  loadItems("rest/players", "#players-list");
+  loadItems("rest/news", "#news-list");
 
   function loadItems(url, listId) {
     loadContent(url, function(response) {
@@ -36,13 +36,13 @@ $(document).ready(function() {
       var itemType;
 
       if ($("#teams-list").has($(this)).length) {
-        deleteUrl = "http://localhost/localbb/server/rest/teams/" + itemId;
+        deleteUrl = "rest/teams/" + itemId;
         itemType = "team";
       } else if ($("#players-list").has($(this)).length) {
-        deleteUrl = "http://localhost/localbb/server/rest/players/" + itemId;
+        deleteUrl = "rest/players/" + itemId;
         itemType = "player";
       } else if ($("#news-list").has($(this)).length) {
-        deleteUrl = "http://localhost/localbb/server/rest/news/" + itemId;
+        deleteUrl = "rest/news/" + itemId;
         itemType = "news";
       }
 
@@ -68,7 +68,7 @@ $(document).ready(function() {
     });
   }
   function loadTeams() {
-    loadContent("http://localhost/localbb/server/rest/teams", function(response) {
+    loadContent("rest/teams", function(response) {
       var teamDropdown = $("#player-team-id"); 
       teamDropdown.empty(); 
 
@@ -114,7 +114,7 @@ $(document).ready(function() {
       league_id: $("#team-league-id").val(),
       team_coach: $("#team-coach").val()
     };
-    createItem("http://localhost/localbb/server/rest/teams", createData, "team");
+    createItem("rest/teams", createData, "team");
     $(this).trigger("reset");
   });
 
@@ -127,7 +127,7 @@ $(document).ready(function() {
       player_age: $("#player-age").val(),
       team_id: $("#player-team-id").val() 
     };
-    createItem("http://localhost/localbb/server/rest/players", createData, "player");
+    createItem("rest/players", createData, "player");
     $(this).trigger("reset");
   });
 
@@ -138,7 +138,7 @@ $(document).ready(function() {
       news_title: $("#news-title").val(),
       news_content: $("#news-content").val()
     };
-    createItem("http://localhost/localbb/server/rest/news", createData, "news");
+    createItem("rest/news", createData, "news");
     $(this).trigger("reset");
   });
 

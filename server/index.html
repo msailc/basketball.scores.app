@@ -1,42 +1,68 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Scores // Home</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/matches.css">
   <link rel="stylesheet" href="assets/css/teams.css">
   <link rel="stylesheet" href="assets/css/news.css">
+  <style>
+  </style>
 </head>
 
 <body>
-  <div class="sidebar">
-    <!-- Sidebar content goes here -->
-    <div class="header-app-name">
-      <h1>Scores</h1>
+  <div class="container">
+
+    <div class="sidebar">
+      <!-- Sidebar content goes here -->
+      <div class="header-app-name">
+        <h1>Scores</h1>
+      </div>
+      <ul class="sidebar-items">
+        <li class="sidebar-items-li" id="homeButton">Home</li>
+        <li class="sidebar-items-li">Teams</li>
+        <li class="sidebar-items-li">News</li>
+      </ul>
+      <ul class="sidebar-bottom-buttons">
+        <li class="sidebar-items-li">Sign in</li>
+      </ul>
     </div>
-    <ul class="sidebar-items">
-      <li class="sidebar-items-li">Home</li>
-      <li class="sidebar-items-li">Teams</li>
-      <li class="sidebar-items-li">News</li>
-    </ul>
-    <ul class="sidebar-bottom-buttons">
-      
-      <li class="sidebar-items-li">Sign in</li>
-    </ul>
-  </div>
-  
-  <div class="content">
     
-    <!-- This is where content is loaded -->
+    <div class="content">
+      <!-- This is where content is loaded -->
+    </div>
+
+    
+    <div class="navbar">
+      <ul class="navbar-items">
+        <li class="navbar-items-li" id="homeButtonMobile">Home</li>
+        <li class="navbar-items-li">Teams</li>
+        <li class="navbar-items-li">News</li>
+        <li class="navbar-items-li">Sign in</li>
+        <!-- Add "Logout" or "Admin panel" option here if needed -->
+      </ul>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="assets/js/matchServices.js"></script>
   <script src="assets/js/teamServices.js"></script>
-  <script src="assets/js/leagueServices.js"></script>
   <script src="assets/js/newsServices.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="assets/utils/requestHandler.js"></script>
   <script src="assets/utils/utils.js"></script>
   <script src="assets/utils/loginHandler.js"></script>
+  <script src="assets/js/navbar.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Load data from Home button
+      $(document).ready(function() {
+      $("#homeButton").trigger("click");
+      $("#homeButtonMobile").trigger("click");
+    });
+    });
+  </script>
 </body>
 </html>

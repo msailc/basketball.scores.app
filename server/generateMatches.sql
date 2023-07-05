@@ -1,6 +1,4 @@
-
 SET @match_id := 1;
-
 INSERT INTO matches (id, match_date, home_team_id, away_team_id, home_team_score, away_team_score, league_id)
 SELECT
   @match_id := @match_id + 1 AS id,

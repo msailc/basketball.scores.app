@@ -3,7 +3,7 @@ $(document).ready(function() {
     const itemText = $(this).text();
 
     if (itemText === "Home") {
-      loadContent("http://localhost/localbb/server/rest/matches", function(response) {
+      loadContent("rest/matches", function(response) {
         $(".content").html(function() {
           return `
             <div class="filter-container">
@@ -23,7 +23,8 @@ $(document).ready(function() {
                 </select>
               </div>
             </div>
-            <ul class="matches-list"></ul>
+            <ul class="matches-list">
+            </ul>
           `;
         });
 
@@ -32,7 +33,7 @@ $(document).ready(function() {
         $("#league-filter").change(function() {
           var selectedLeagueId = $(this).val();
           if (selectedLeagueId !== "") {
-            loadContent("http://localhost/localbb/server/rest/teams", function(teamsResponse) {
+            loadContent("rest/teams", function(teamsResponse) {
               var filteredTeams = teamsResponse.filter(function(team) {
                 return team.league_id == selectedLeagueId;
               });
@@ -68,7 +69,7 @@ $(document).ready(function() {
         });
       });
     } else if (itemText === "Teams") {
-      loadContent("http://localhost/localbb/server/rest/standings", function(response) {
+      loadContent("rest/standings", function(response) {
         displayTeams(response);
 
         $(".content").html(function() {
@@ -96,7 +97,7 @@ $(document).ready(function() {
         $("#nba-tab").trigger("click");
       });
     } else if (itemText === "News") {
-      loadContent("http://localhost/localbb/server/rest/news", function(response) {
+      loadContent("rest/news", function(response) {
         displayNews(response);
       });
     } else if (itemText === "Sign in") {

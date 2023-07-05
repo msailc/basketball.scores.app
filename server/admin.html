@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Scores // Admin Panel</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <style>
     .admin-panel {
@@ -65,11 +67,30 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
+    .admin-panel-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    .admin-panel-top .button {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    .admin-panel-top .generate-button {
+      margin-left: 15px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
-  <button class="back-button" id="back-to-index-button">Back</button>
-
+  <div class="admin-panel-top">
+    <button class="button" id="back-to-index-button">Back</button>
+    <button class="generate-button" id="generate-button">Generate matches</button>
+  </div>
   <div class="admin-panel">
     <div class="admin-box">
       <h2>
@@ -95,7 +116,6 @@
         <input type="text" id="team-coach" name="team-coach"><br>
 
         <input type="submit" value="Create">
-        <button class="back-button" id="team-back-button">Back</button>
       </form>
       <ul id="teams-list" class="scrollable-list"></ul>
     </div>
@@ -118,7 +138,6 @@
         <select id="player-team-id" name="player-team-id"></select><br>
 
         <input type="submit" value="Create">
-        <button class="back-button" id="player-back-button">Back</button>
       </form>
       <ul id="players-list" class="scrollable-list"></ul>
     </div>
@@ -135,7 +154,6 @@
         <input type="text" id="news-content" name="news-content"><br>
 
         <input type="submit" value="Create">
-        <button class="back-button" id="news-back-button">Back</button>
       </form>
       <ul id="news-list" class="scrollable-list"></ul>
     </div>
@@ -161,24 +179,22 @@
         $("#create-news-form").toggle();
         $("#news-list").toggle();
       });
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      $("#team-back-button").click(function() {
-        $("#create-team-form").toggle();
-        $("#teams-list").toggle();
-      });
-
-      $("#player-back-button").click(function() {
-        $("#create-player-form").toggle();
-        $("#players-list").toggle();
-      });
-
-      $("#news-back-button").click(function() {
-        $("#create-news-form").toggle();
-        $("#news-list").toggle();
-      });
 
       $("#back-to-index-button").click(function() {
         window.location.href = "index.html";
+      });
+      
+      $("#generate-button").click(function() {
+        $.ajax({
+          url: "http://localhost/localbb/server/rest/generate-matches",
+          type: "GET",
+          success: function(data) {
+            alert("Matches generated successfully");
+          },
+          error: function(xhr, status, error) {
+            console.log(error);
+          }
+        });
       });
     });
   </script>

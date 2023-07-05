@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Login // Home</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="assets/utils/requestHandler.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+
+    }
+
+    .login-container {
+      text-align: center;
+      background-color: white;
+      border-radius: 10px;
+      height: 30vh;
+      width: 50vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #login-form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+      
+    }
+
+    #email {
+      margin-bottom: 20px;
+    }
+
+    #password {
+      margin-bottom: 20px;
+    }
+
+    #login-form input[type="text"],
+    #login-form input[type="password"],
+    #login-form input[type="submit"] {
+      background-color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>Login Page</h1>
-  <form id="login-form">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" required><br>
+  <div class="login-container">
+    <h1>Login Page</h1>
+    <form id="login-form">
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" required><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
 
-    <input type="submit" value="Sign in">
-  </form>
+      <input type="submit" value="Sign in">
+
+      <p>Only authorized personnel is allowed to login</p>
+    </form>
+  </div>
 
   <script src="assets/utils/loginHandler.js"></script>
 </body>

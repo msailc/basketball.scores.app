@@ -13,5 +13,9 @@ Flight::route('GET /standings', function () {
     Flight::json(Flight::matchService()->get_standings());
 });
 
+Flight::route('GET /generate-matches', function () {
+    Flight::matchService()->generate_matches();
+    Flight::json(['message' => 'Matches generated successfully']);
+});
 
 ?>

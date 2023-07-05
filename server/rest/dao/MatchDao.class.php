@@ -49,5 +49,11 @@ class MatchDao extends BaseDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function generate_matches()
+    {
+        $stmt = $this->conn->prepare("CALL generate_matches()"); 
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
 }
 ?>
