@@ -8,6 +8,10 @@ WORKDIR /var/www/html
 RUN apt-get update && apt-get install -y default-mysql-client default-libmysqlclient-dev \
     && docker-php-ext-install pdo pdo_mysql
 
+RUN apt-get update \
+    && apt-get install -y zip unzip
+
+
 # Copy the application files to the container
 COPY . /var/www/html
 
