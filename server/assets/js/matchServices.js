@@ -11,13 +11,27 @@ function displayMatches(matches, teamFilter) {
     listHTML += "<p><strong>Date & Time:</strong> " + match.match_date + "</p>";
     listHTML += "<p><strong>Location:</strong> " + match.location + "</p>";
     listHTML += "</div>";
-    listHTML += "<p class='teams'>" + match.home_team_name + " " + match.home_team_score + " vs " + match.away_team_score + " " + match.away_team_name + "</p>";
+    listHTML += "<div class='match-result'>";
+    listHTML += "<div class='home-team'>";
+    listHTML += "<div class='team-logo'><img src='logos/" + getTeamLogoFilename(match.home_team_name) + "' alt='" + match.home_team_name + " Logo'></div>";
+    listHTML += "<p class='team-name'>" + match.home_team_name + "</p>";
+    listHTML += "</div>";
+    listHTML += "<p class='match-score'>" + match.home_team_score + " - " + match.away_team_score + "</p>";
+    listHTML += "<div class='away-team'>";
+    listHTML += "<div class='team-logo'><img src='logos/" + getTeamLogoFilename(match.away_team_name) + "' alt='" + match.away_team_name + " Logo'></div>";
+    listHTML += "<p class='team-name'>" + match.away_team_name + "</p>";
+    listHTML += "</div>";
+    listHTML += "</div>";
     listHTML += "</li>";
   });
 
   listHTML += "</div>";
 
   $(".matches-list").html(listHTML);
+}
+
+function getTeamLogoFilename(teamName) {
+  return teamName.toLowerCase().replace(/\s/g, "-") + "-logo.png";
 }
 
 

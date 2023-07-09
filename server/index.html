@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/matches.css">
   <link rel="stylesheet" href="assets/css/teams.css">
   <link rel="stylesheet" href="assets/css/news.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
   </style>
 </head>
@@ -40,8 +41,6 @@
         <li class="navbar-items-li" id="homeButtonMobile">Home</li>
         <li class="navbar-items-li">Teams</li>
         <li class="navbar-items-li">News</li>
-        <li class="navbar-items-li">Sign in</li>
-        <!-- Add "Logout" or "Admin panel" option here if needed -->
       </ul>
     </div>
   </div>
@@ -56,6 +55,7 @@
   <script src="assets/utils/loginHandler.js"></script>
   <script src="assets/js/navbar.js"></script>
   <script>
+
     $(document).ready(function() {
       // Load data from Home button
       $(document).ready(function() {
@@ -63,6 +63,12 @@
       $("#homeButtonMobile").trigger("click");
     });
     });
+
+    $(".sidebar").on("click", ".sidebar-items-li", function() {
+        $(".sidebar-items-li").removeClass("selected");
+        $(this).addClass("selected");
+      });
+      
   </script>
 </body>
 </html>

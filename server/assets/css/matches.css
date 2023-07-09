@@ -17,10 +17,51 @@
 }
 
 .content ul li {
+  position: relative;
   border-bottom: 1px solid white;
   margin-bottom: 10px;
-  text-align: center;
+  padding: 20px;
   font-size: 12px;
+  text-align: center;
+}
+
+.match-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-result .team-logo {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-result .team-logo img {
+  height: 70px; /* Adjust the height as needed */
+}
+
+.match-result .team-name {
+  text-align: center;
+  font-size: 14px;
+}
+
+.match-result .match-score {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.match-result .home-team {
+  display: flex;
+  flex-direction: column;
+  padding-right: 80px;
+}
+
+.match-result .away-team {
+  display: flex;
+  flex-direction: column;
+  padding-left: 80px;
 }
 
 .content ul li .teams {
@@ -33,13 +74,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 10px;
 }
 
 .filter-container label {
   color: white;
   font-weight: bold;
   padding: 10px;
-
 }
 
 .filter-container select {

@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #242424;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -66,6 +67,10 @@ body {
 
 .navbar {
   display: none;
+}
+
+.sidebar-items-li.selected {
+  text-decoration: underline;
 }
 
 .sidebar {
