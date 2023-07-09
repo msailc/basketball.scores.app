@@ -37,6 +37,7 @@ require_once __DIR__ . '/routes/LeagueRoutes.php';
 require_once __DIR__ . '/routes/NewsRoutes.php';
 require_once __DIR__ . '/routes/UserRoutes.php';
 
+
 Flight::route('/*', function() 
 {
     $path = Flight::request()->url;
@@ -59,9 +60,18 @@ Flight::route('/*', function()
     }
 });
 
+Flight::route('GET /docs.json', function(){
+    $openapi = \OpenApi\scan('routes');
+    header('Content-Type: application/json');
+    echo $openapi->toJson();
+  });
+
+
+
 Flight::route('GET /', function () {
     echo "Hello";
 });
+
 
 Flight::start();
 ?>

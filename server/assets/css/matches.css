@@ -85,7 +85,7 @@
 
 .filter-container select {
   padding: 5px;
-  width: 150px; /* Adjust the width as needed */
+  width: 150px;
 }
 
 @media (max-width: 767px) {
@@ -93,5 +93,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .match-result .team-name {
+    display: none;
+  }
+
+  .match-result .match-score {
+    font-size: 14px;
   }
 }
