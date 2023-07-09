@@ -91,3 +91,7 @@
     margin-left: 10px;
     color: white;
   }
+  
+  .team-logo-cell img {
+    height: 40px;
+  }

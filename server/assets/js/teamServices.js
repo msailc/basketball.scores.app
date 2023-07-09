@@ -1,10 +1,11 @@
 function displayTeams(teams, leagueId) {
   var tableHTML = "<table class='standings-table'>";
-  tableHTML += "<tr><th>Team</th><th>Wins</th><th>Losses</th><th>Points For</th><th>Points Against</th></tr>";
+  tableHTML += "<tr><th>Logo</th><th>Team</th><th>Wins</th><th>Losses</th><th>Points For</th><th>Points Against</th></tr>";
 
   teams.forEach(function(team) {
     if (team.league_id === leagueId) {
       tableHTML += "<tr id='team-" + team.id + "'>";
+      tableHTML += "<td class='team-logo-cell'><img src='logos/" + getTeamLogoFilename(team.team_name) + "' alt='" + team.team_name + " Logo'></td>";
       tableHTML += "<td class='team-name-cell'><a class='team-link' data-team-id='" + team.id + "'>" + team.team_name + "</a></td>";
       tableHTML += "<td>" + team.wins + "</td>";
       tableHTML += "<td>" + team.losses + "</td>";
