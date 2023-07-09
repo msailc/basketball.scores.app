@@ -17,7 +17,7 @@ Flight::route('GET /users/@email', function ($email) {
             if (isset($user['id'])) {
                 if (password_verify($login['password'], $user['password'])) {
                     unset($user['password']);
-                    $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
+                    $jwt = JWT::encode($user, $_ENV['JWT_SECRET'], 'HS256');
                     Flight::json(['token' => $jwt]);
                 } else {
                     Flight::json(["message" => "Incorrect password"], 404);

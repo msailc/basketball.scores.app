@@ -4,8 +4,12 @@ ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_report
 
 require '../vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 // enable CORS
 header('Access-Control-Allow-Origin: *');
@@ -45,7 +49,7 @@ Flight::route('/*', function()
         return false;
     } else {
         try {
-            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+            $decoded = (array)JWT::decode($headers['Authorization'], new Key($_ENV['JWT_SECRET'], 'HS256'));
             Flight::set('user', $decoded);
             return true;
         } catch (\Exception $e) {
