@@ -144,21 +144,26 @@ $(document).ready(function() {
 
   function createItem(url, data, itemType) {
     var token = localStorage.getItem("token");
-
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: data,
-      headers: {
-        Authorization: token
-      },
-      success: function(response) {
-        console.log(itemType + " created successfully:", response);
-        loadItems(url, "#" + itemType + "s-list"); 
-      },
-      error: function(error) {
-        console.log("Failed to create " + itemType + ":", error);
-      }
-    });
+  
+    if (token) {
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        headers: {
+          Authorization: token
+        },
+        success: function(response) {
+          console.log(itemType + " created successfully:", response);
+          loadItems(url, "#" + itemType + "s-list"); 
+        },
+        error: function(error) {
+          console.log("Failed to create " + itemType + ":", error);
+        }
+      });
+    } else {
+      console.log("Authentication token is missing. Unable to make the POST request.");
+    }
   }
+  
 });

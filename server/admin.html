@@ -166,6 +166,13 @@
   <script src="assets/utils/utils.js"></script>
   <script>
     $(document).ready(function() {
+      var token = localStorage.getItem("token");
+
+    if (!token) {
+      window.location.href = "index.html";
+      alert("You have no access to this page!");
+    }
+
       $("#create-team-button").click(function() {
         $("#create-team-form").toggle();
         $("#teams-list").toggle();
