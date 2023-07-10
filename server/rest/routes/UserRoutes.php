@@ -41,23 +41,29 @@ Flight::route('GET /users/@email', function ($email) {
  */
 Flight::route('POST /login', function () {
     $login = Flight::request()->data->getData();
-    if (isset($login['email'])) {  // Check if the "email" key exists
+    if (isset($login['email'])) {
         $user = Flight::userService()->get_user_by_email($login['email']);
         if (isset($user['id'])) {
             if (password_verify($login['password'], $user['password'])) {
                 unset($user['password']);
-                $jwt = JWT::encode($user, $_ENV['JWT_SECRET'], 'HS256');
+            
+                $expiration = time() + (24 * 60 * 60);
+                $payload = array_merge($user, ['exp' => $expiration]);
+                // Encode the payload into a JWT token
+                $jwt = JWT::encode($payload, $_ENV['JWT_SECRET'], 'HS256');
+                
                 Flight::json(['token' => $jwt]);
             } else {
-                 Flight::json(["message" => "Incorrect password"], 404);
-             }
+                Flight::json(["message" => "Incorrect password"], 404);
+            }
         } else {
-             Flight::json(["message" => "User doesn't exist"], 404);
-          }
-      } else {
-          Flight::json(["message" => "Email is missing"], 400);
-       }
+            Flight::json(["message" => "User doesn't exist"], 404);
+        }
+    } else {
+        Flight::json(["message" => "Email is missing"], 400);
+    }
 });
+
 
 //create user
 /**

@@ -1,6 +1,8 @@
 <?php
 
-ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
 
@@ -23,6 +25,13 @@ require_once __DIR__ . '/services/LeagueServices.php';
 require_once __DIR__ . '/services/NewsServices.php';
 require_once __DIR__ . '/services/UserServices.php';
 
+Flight::before('/*', function () {
+    if (Flight::request()->method === 'POST' && !Flight::get('user')) {
+        Flight::json(["message" => "Authentication is required for POST requests"], 401);
+        return false;
+    }
+});
+
 Flight::register('teamService', "TeamServices");
 Flight::register('playerService', "playerServices");
 Flight::register('matchService', "matchServices");
@@ -37,15 +46,13 @@ require_once __DIR__ . '/routes/LeagueRoutes.php';
 require_once __DIR__ . '/routes/NewsRoutes.php';
 require_once __DIR__ . '/routes/UserRoutes.php';
 
-
-Flight::route('/*', function() 
-{
+Flight::route('/*', function () {
     $path = Flight::request()->url;
     if ($path == '/login' || $path == '/docs.json') {
         return true;
     }
     $headers = getallheaders();
-    if (@!$headers['Authorization']) {
+    if (!isset($headers['Authorization'])) {
         Flight::json(["message" => "Authorization is missing"], 403);
         return false;
     } else {
@@ -60,18 +67,16 @@ Flight::route('/*', function()
     }
 });
 
-Flight::route('GET /docs.json', function(){
+Flight::route('GET /docs.json', function () {
     $openapi = \OpenApi\scan('routes');
     header('Content-Type: application/json');
     echo $openapi->toJson();
-  });
-
-
+});
 
 Flight::route('GET /', function () {
     echo "Hello";
 });
 
-
 Flight::start();
+
 ?>

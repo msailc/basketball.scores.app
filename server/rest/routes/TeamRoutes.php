@@ -56,6 +56,12 @@ Flight::route('GET /teams/@id/players', function ($id) {
 * )
 */
 Flight::route('POST /teams', function () {
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        Flight::json(["message" => "Authentication is required for POST requests"], 401);
+        return;
+    }
+    
     $data = Flight::request()->data->getData();
     $data['id'] = rand(100000, 100000000);
     Flight::json(Flight::teamService()->add($data));

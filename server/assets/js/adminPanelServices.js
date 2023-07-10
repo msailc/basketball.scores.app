@@ -143,10 +143,15 @@ $(document).ready(function() {
   });
 
   function createItem(url, data, itemType) {
+    var token = localStorage.getItem("token");
+
     $.ajax({
       url: url,
       type: "POST",
       data: data,
+      headers: {
+        Authorization: token
+      },
       success: function(response) {
         console.log(itemType + " created successfully:", response);
         loadItems(url, "#" + itemType + "s-list"); 

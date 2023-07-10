@@ -20,34 +20,40 @@ Flight::route('GET /news/@id', function ($id) {
 });
 
 /**
-* @OA\Post(
-*     path="/news",
-*     description="Add a new topic",
-*     tags={"news"},
-*     summary="Adds a new topic to the db",
-*     security={{"ApiKeyAuth": {}}},
-*     @OA\RequestBody(description="Basic topic info", required=true,
-*       @OA\MediaType(mediaType="application/json",
-*    			@OA\Schema(
-*           @OA\Property(property="news_title", type="string", example="Some title",	description="Name of the topic"),
-*           @OA\Property(property="news_content", type="string", example="Some text",	description="Topic content"),
-*        )
-*     )),
-*     @OA\Response(
-*         response=200,
-*         description="News added"
-*     ),
-*     @OA\Response(
-*         response=404,
-*         description="Unexpected error"
-*     ),
-*     @OA\Response(
-*         response=403,
-*         description="JWT token not passed"
-*     )
-* )
-*/
+ * @OA\Post(
+ *     path="/news",
+ *     description="Add a new topic",
+ *     tags={"news"},
+ *     summary="Adds a new topic to the db",
+ *     security={{"ApiKeyAuth": {}}},
+ *     @OA\RequestBody(description="Basic topic info", required=true,
+ *       @OA\MediaType(mediaType="application/json",
+ *         @OA\Schema(
+ *           @OA\Property(property="news_title", type="string", example="Some title", description="Name of the topic"),
+ *           @OA\Property(property="news_content", type="string", example="Some text", description="Topic content"),
+ *        )
+ *     )),
+ *     @OA\Response(
+ *         response=200,
+ *         description="News added"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Unexpected error"
+ *     ),
+ *     @OA\Response(
+ *         response=403,
+ *         description="JWT token not passed"
+ *     )
+ * )
+ */
 Flight::route('POST /news', function () {
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        Flight::json(["message" => "Authentication is required for POST requests"], 401);
+        return;
+    }
+
     $data = Flight::request()->data->getData();
     $data['id'] = rand(100000, 100000000);
     Flight::json(Flight::newsService()->add($data));

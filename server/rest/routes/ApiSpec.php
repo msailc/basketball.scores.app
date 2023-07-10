@@ -7,6 +7,7 @@
  *    @OA\Server(url="http://localhost/localbb/server/rest", description="Development Environment" ),
  *    @OA\Server(url="https://scores-app.onrender.com/rest", description="Production Environment" )
  * ),
+ * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization" )
  */
 
 ?>
